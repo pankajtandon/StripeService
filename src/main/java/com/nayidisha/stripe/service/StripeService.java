@@ -117,7 +117,7 @@ public class StripeService {
     /**
      * When the customer’s latest invoice is billed by charging automatically, delinquent is true if the invoice’s latest charge is failed.
      * @param customerId
-     * @return
+     * @return Boolean true if the customer is delinquent
      */
     public Boolean isCustomerDelinquent(String customerId) {
         Boolean delinquent = false;
@@ -171,7 +171,7 @@ public class StripeService {
      * @return - List<CustomerLite>. This can be used to retrieve each <code>Customer</code> object
      * by using <code>retrieveCustomerById(String customerId) </code>
      * @param category
-     * @return
+     * @return List<CustomerLite> - List of CustomerLite
      */
     public List<CustomerLite> listAllCustomersByCategory(String category) {
         Map<String, Object> customerParameters = new HashMap();
@@ -508,7 +508,7 @@ public class StripeService {
     /**
      * Returns true if this customer does not have a valid payment source (aka token)
      * @param customerId
-     * @return
+     * @return Boolean - true if Customer has an active payment source
      */
     public boolean doesCustomerHaveActivePaymentSource(String customerId) {
         boolean hasPaymentSource = false;

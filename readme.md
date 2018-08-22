@@ -4,14 +4,14 @@ Stripe Service
 This service exposes a Java API based on the [rich API](https://stripe.com/docs/api/java#intro) provided by the [Stripe Payment Gateway](https://stripe.com)
 and offers an opinionated but limited functionality of using payment gateway.
 
-The `StripeService` can be used in your application by being added as a dependency in your project by adding:
+The `StripeService` can be used in your application by being added as a dependency your application's `pom.xml` :
 
 ```
-		<dependency>
-			<groupId>com.nayidisha.stripe</groupId>
-			<artifactId>stripe-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+    <dependency>
+        <groupId>com.nayidisha.stripe</groupId>
+        <artifactId>stripe-service</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
 ```
 
 Most [Common Use Cases](#Common-Use-Cases) are covered by this service. 
@@ -160,5 +160,12 @@ The use cases that can currently be addressed are below. See [Tests](src/test/ja
 ### To build and run tests
 
 ```
-  mvn clean install -Dstripe.apiKey=<your-api-key-here>
+  mvn clean install -Dstripe.apiKey=<your-api-key-here> 
+  
+  # Skip gpg signing 
+  mvn clean install -Dstripe.apiKey=<your-api-key-here> -Dgpg.skip=true
+  
 ```     
+
+### Adding Project Lombok Agent
+This project uses Project Lombok to generate getters and setters etc. Compiling from the command line this shouldn't cause any problems, but in an IDE you need to add an agent to the JVM. Full instructions can be found in the Lombok website. The sign that you need to do this is a lot of compiler errors to do with missing methods and fields.
