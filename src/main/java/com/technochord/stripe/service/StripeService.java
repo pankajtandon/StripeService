@@ -45,11 +45,11 @@ public class StripeService {
      * Creation of a customer requires a unique email address and a description.
      * If that email address has been used before, then a <code>StripeException</code> will be thrown.
      * You can also pass a category (optional). This category can be used to retrieve customers
-     * in this category using <code>List<CustomerLite> listAllCustomersByCategory(String category)</code>
+     * in this category using {@link #listAllCustomersByCategory(String category)}
      *
-     * @param email - required
-     * @param description - required
-     * @param category - Optional - Any arbitrary string, used to search customers.
+     * @param email required
+     * @param description required
+     * @param category Optional - Any arbitrary string, used to search customers.
      * @return customerId of created customer
      */
     public String createCustomer(String email, String description, String category) {
@@ -83,8 +83,8 @@ public class StripeService {
     /**
      * Creation of a customer requires a unique email address and a description.
      * If that email address has been used before, then a <code>StripeException</code> will be thrown.
-     * @param email
-     * @param description
+     * @param email Email address of customer
+     * @param description description of customer
      * @return customerId corresponding to the created customer.
      */
     public String createCustomer(String email, String description) {
@@ -94,8 +94,8 @@ public class StripeService {
 
     /**
      * Update an existing customer's category
-     * @param customerId
-     * @param category
+     * @param customerId Id of customer
+     * @param category Optional category of customer
      */
     public void updateCustomerCategory(String customerId, String category) {
         if (StringUtils.isEmpty(category)){
@@ -116,7 +116,7 @@ public class StripeService {
 
     /**
      * When the customer’s latest invoice is billed by charging automatically, delinquent is true if the invoice’s latest charge is failed.
-     * @param customerId
+     * @param customerId Id of customer
      * @return Boolean true if the customer is delinquent
      */
     public Boolean isCustomerDelinquent(String customerId) {
@@ -132,7 +132,7 @@ public class StripeService {
 
     /**
      * Returns all customers against this Stripe API key
-     * @return - List<CustomerLite>. This can be used to retrieve each <code>Customer</code> object
+     * @return List &lt;CustomerLite &gt;. This can be used to retrieve each <code>Customer</code> object
      * by using <code>retrieveCustomerById(String customerId) </code>
      */
     public List<CustomerLite> listAllCustomers() {
@@ -168,10 +168,10 @@ public class StripeService {
 
     /**
      * Returns all customers who have the specified category.
-     * @return - List<CustomerLite>. This can be used to retrieve each <code>Customer</code> object
+     * @return List &lt;CustomerLite&gt;. This can be used to retrieve each <code>Customer</code> object
      * by using <code>retrieveCustomerById(String customerId) </code>
-     * @param category
-     * @return List<CustomerLite> - List of CustomerLite
+     * @param category Id of customer
+     * @return List &lt;CustomerLite&gt; List of CustomerLite
      */
     public List<CustomerLite> listAllCustomersByCategory(String category) {
         Map<String, Object> customerParameters = new HashMap();
@@ -212,8 +212,8 @@ public class StripeService {
     /**
      * Returns a full <code>Customer</code> object corresponding to customerId passed in.
      * If no user is found, then a null object is returned.
-     * @param customerId
-     * @return - Customer
+     * @param customerId Id of customer
+     * @return Customer
      */
     public Customer retrieveCustomerById(String customerId) {
         Customer c = null;
@@ -233,9 +233,9 @@ public class StripeService {
      * Since email address is unique, if more than one customer is found using the same
      * email address, then a <code>StripeException</code> is thrown.
      * If no user is found, then a null object is returned.
-     * @param email
-     * @return - Customer
-     * @throws StripeException - if the number of users with this email address > 1
+     * @param email Email of customer
+     * @return Customer
+     * @throws StripeException if the number of users with this email address &gt; 1
      */
     public Customer retrieveCustomerByEmail(String email) {
         List<Customer> customerList = null;
@@ -263,7 +263,7 @@ public class StripeService {
     /**
      * Deleted customers' history is retained by Stripe and they can still be retrieved with the `delete` flag set to true.
      * Deleted customers cannot be used in future transactions or subscriptions.
-     * @param customerId - Id of customer to delete.
+     * @param customerId Id of customer to delete.
      */
     public void deleteCustomer(String customerId) {
         try {
@@ -287,7 +287,7 @@ public class StripeService {
 
     /**
      * Removes the applied Payment Source (token) for the passed in customer
-     * @param customerId
+     * @param customerId Id of customer
      */
     public void removePaymentSourceFromCustomer(String customerId) {
         try {
@@ -314,9 +314,9 @@ public class StripeService {
     /**
      * The email address of a customer can be changed to the specified email address.
      *
-     * @param customerId
-     * @param newEmail
-     * @throws StripeException - if the passed in email address is already associated to an existing Stripe customer.
+     * @param customerId Id of customer
+     * @param newEmail New email to change to
+     * @throws StripeException if the passed in email address is already associated to an existing Stripe customer.
      */
     public void changeCustomerEmail(String customerId, String newEmail) {
         Customer existing = this.retrieveCustomerByEmail(newEmail);
@@ -344,11 +344,11 @@ public class StripeService {
      * The customer is also charged as per the the plan amount (after applying discounts as specified by coupons applied
      * to the Customer)
      *
-     * @param email - email of the customer who is being added to the subscription with the specified plainId
-     * @param planId - required. The plan to tie this customer to via this subscription.
+     * @param email email of the customer who is being added to the subscription with the specified plainId
+     * @param planId required. The plan to tie this customer to via this subscription.
      * @return the created subscriptionId.
-     * @throws StripeException - if the PlanId is invalid
-     * @throws StripeException - if the customer represented by the passed in email has no Payment Source
+     * @throws StripeException if the PlanId is invalid
+     * @throws StripeException if the customer represented by the passed in email has no Payment Source
      */
     public String createSubscriptionForCustomerAndCharge(String email, String planId) {
         Customer c = this.retrieveCustomerByEmail(email);
@@ -361,11 +361,11 @@ public class StripeService {
      * Since a customer can have only one plan at a time, all existing subscriptions are canceled
      * before creating a new subscription.
      *
-     * @param customerId - required
-     * @param planId - required
+     * @param customerId required
+     * @param planId required
      * @return SubscriptionId of created Subscription
-     * @throws StripeException - if the PlanId is invalid
-     * @throws StripeException - if the customer represented by the passed in customerId has no Payment Source
+     * @throws StripeException if the PlanId is invalid
+     * @throws StripeException if the customer represented by the passed in customerId has no Payment Source
      */
     public String createSubscriptionAndCharge(String customerId, String planId) {
         // Ensure that the plan is valid
@@ -414,6 +414,11 @@ public class StripeService {
         return createdSubscription.getId();
     }
 
+    /**
+     * Cancels all existing Subscritptions for the customer corresponding to the passed in customerId.
+     *
+     * @param customerId Id of customer
+     */
     public void cancelAllExistingSubscriptionsForCustomer(String customerId) {
         List<Subscription> existingSubscriptions = this.getAllSubscriptionByCustomer(customerId);
         if (existingSubscriptions != null) {
@@ -431,10 +436,10 @@ public class StripeService {
     /**
      * Returns Subscription for a customerId and Plan
      * If there are more than one subscription for this combination then a <code>StripeException</code> is thrown
-     * @param customerId
-     * @param planId
+     * @param customerId Id of customer
+     * @param planId Plan Id configured on Stripe.com
      * @return Subscription
-     * @throws StripeException - If there are  more than one subscriptions for this customerId and with the this planId
+     * @throws StripeException If there are  more than one subscriptions for this customerId and with the this planId
      */
     public Subscription getSubscriptionByCustomerAndPlan(String customerId, String planId) {
         Subscription foundSubscription = null;
@@ -463,9 +468,9 @@ public class StripeService {
      * If there are more than one subscription then a <code>StripeException</code> is thrown
      * If none, then null Subscription is returned.
      *
-     * @param customerId
+     * @param customerId Id of customer
      * @return Subscription
-     * @throws StripeException - There are more than one subscriptions for this customerId
+     * @throws StripeException There are more than one subscriptions for this customerId
      */
     public List<Subscription> getAllSubscriptionByCustomer(String customerId) {
         List<Subscription> subscriptionList = null;
@@ -488,7 +493,7 @@ public class StripeService {
 
     /**
      * Returns true if this plan is a valid plan (created typically via the Stripe Dashboard).
-     * @param planId
+     * @param planId Plan Id configured on Stripe.com
      * @return Boolean
      */
     public boolean isPlanValid(String planId) {
@@ -507,8 +512,8 @@ public class StripeService {
 
     /**
      * Returns true if this customer does not have a valid payment source (aka token)
-     * @param customerId
-     * @return Boolean - true if Customer has an active payment source
+     * @param customerId Id of customer
+     * @return Boolean true if Customer has an active payment source
      */
     public boolean doesCustomerHaveActivePaymentSource(String customerId) {
         boolean hasPaymentSource = false;
@@ -527,8 +532,8 @@ public class StripeService {
      * If more than one invoice is returned, then only the latest invoice is returned.
      * If no invoice is found, a null invoice is returned.
      *
-     * @param subscriptionId
-     * @return Invoice - latest Invoice, null if no invoice found
+     * @param subscriptionId Subscription Id of the subscription.
+     * @return Invoice latest Invoice, null if no invoice found
      */
     public Invoice getLatestInvoiceForSubscription(String subscriptionId) {
         //Retrieve Invoice
@@ -553,9 +558,9 @@ public class StripeService {
      * If a payment source already exists for this customer, then the passed in token *replaces* the existing payment source.
      * It also makes the payment source passed in (token) the default.
      * If the customerId being passed in does not represent a customer, then <code>StripeException</code> is thrown.
-     * @param customerId
-     * @param token
-     * @throws StripeException - If the passed token is null
+     * @param customerId Id of customer
+     * @param token Payment source
+     * @throws StripeException If the passed token is null
      */
     public void replacePaymentSourceForCustomer(String customerId, String token) {
         Customer c = this.retrieveCustomerById(customerId);
@@ -579,10 +584,10 @@ public class StripeService {
 
     /**
      * Applies Coupon (typically created on teh Stripe Dashboard) to a Customer specified by customerId
-     * @param customerId
-     * @param couponId
-     * @throws StripeException - If the passed in coupon does not exist or is invalid.
-     * @throws StripeException - If the passed in customerId does not represent a customer.
+     * @param customerId  Id of customer
+     * @param couponId Coupon to apply (created on Stripe.com)
+     * @throws StripeException If the passed in coupon does not exist or is invalid.
+     * @throws StripeException If the passed in customerId does not represent a customer.
      */
     public void applyCouponToCustomer(String customerId, String couponId) {
         try {
@@ -613,7 +618,7 @@ public class StripeService {
     /**
      * Lists all coupons
      *
-     * @return List<Coupon> - Coupon list
+     * @return List&lt;Coupon&gt; Coupon list
      */
     public List<Coupon> listAllCoupons() {
         Map<String, Object> couponParams = new HashMap();
@@ -627,7 +632,7 @@ public class StripeService {
 
                 //Get the last element
                 if (couponCollection.getData().size() > 0) {
-                    last = couponCollection.getData().get(couponCollection.getData().size() - 1);
+                    last = couponCollection.getData().get(couponCollection.getData().size() -1);
                     couponParams.put(COUPON_STARTING_AFTER, last.getId());
                     couponCollection = Coupon.list(couponParams);
                 }
@@ -641,9 +646,9 @@ public class StripeService {
     }
 
     /**
-     * Lists all Invoices
+     * Lists all Invoices.
      *
-     * @return List<Invoice> - Invoice list
+     * @return List&lt;Invoice&gt; Invoice list
      */
     public List<Invoice> listAllInvoices() {
         Map<String, Object> invoiceParams = new HashMap();
@@ -672,7 +677,7 @@ public class StripeService {
 
     /**
      * Returns the Charge for a given chargeId
-     * @param chargeId
+     * @param chargeId Charge Id
      * @return Charge
      */
     public Charge getCharge(String chargeId) {
