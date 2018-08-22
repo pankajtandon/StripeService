@@ -1,4 +1,4 @@
-package com.nayidisha.stripe;
+package com.technochord.stripe;
 
 public class StripeException extends RuntimeException {
     public StripeException(String message) {

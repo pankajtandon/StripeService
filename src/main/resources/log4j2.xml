@@ -29,7 +29,7 @@
         <AppenderRef ref="Console" />
         <AppenderRef ref="RollingFile" />
     </Root>
-    <Logger name="com.nayidisha" level="debug"></Logger>
+    <Logger name="com.technochord" level="debug"></Logger>
 </Loggers>
 
 </Configuration>

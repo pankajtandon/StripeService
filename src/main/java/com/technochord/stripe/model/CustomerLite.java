@@ -1,4 +1,4 @@
-package com.nayidisha.stripe.model;
+package com.technochord.stripe.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,15 +1,13 @@
-package com.nayidisha.stripe;
+package com.technochord.stripe;
 
-import com.nayidisha.stripe.model.CustomerLite;
-import com.nayidisha.stripe.service.StripeService;
-import com.stripe.Stripe;
+import com.technochord.stripe.model.CustomerLite;
+import com.technochord.stripe.service.StripeService;
 import com.stripe.model.Charge;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.Invoice;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

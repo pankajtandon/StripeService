@@ -8,7 +8,7 @@ The `StripeService` can be used in your application by being added as a dependen
 
 ```
     <dependency>
-        <groupId>com.nayidisha.stripe</groupId>
+        <groupId>com.technochord.stripe</groupId>
         <artifactId>stripe-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </dependency>
@@ -53,7 +53,7 @@ on what coupon is applied on the `Customer` at that time.
  - An Email address is needed to create a customer. (The validitity of the email address is not guaranteed by this service)
  
 ### Common Use Cases     
-The use cases that can currently be addressed are below. See [Tests](src/test/java/com/nayidisha/stripe/StripeApplicationIntegrationTests.java) for examples of most of these use case.
+The use cases that can currently be addressed are below. See [Tests](src/test/java/com/technochord/stripe/StripeApplicationIntegrationTests.java) for examples of most of these use case.
 
 - Create a Stripe `Customer` and record the Stripe `customerId` in your application 
 (possibly against a User object in your application).

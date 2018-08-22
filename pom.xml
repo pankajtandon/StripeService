@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.nayidisha.stripe</groupId>
+	<groupId>com.technochord.stripe</groupId>
 	<artifactId>stripe-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -159,7 +159,7 @@ and offers an opinionated but limited functionality of using payment gateway.
 						</rule>
 					</rules>
 					<excludes>
-						<exclude>com/nayidisha/stripe/*Application*</exclude>
+						<exclude>com/technochord/stripe/*Application*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

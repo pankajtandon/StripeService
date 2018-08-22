@@ -1,7 +1,7 @@
-package com.nayidisha.stripe.service;
+package com.technochord.stripe.service;
 
-import com.nayidisha.stripe.StripeException;
-import com.nayidisha.stripe.model.CustomerLite;
+import com.technochord.stripe.StripeException;
+import com.technochord.stripe.model.CustomerLite;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.*;
 import lombok.extern.log4j.Log4j2;

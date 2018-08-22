@@ -1,6 +1,6 @@
-package com.nayidisha.stripe;
+package com.technochord.stripe;
 
-import com.nayidisha.stripe.service.StripeService;
+import com.technochord.stripe.service.StripeService;
 import com.stripe.Stripe;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
