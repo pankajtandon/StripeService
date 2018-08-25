@@ -1,8 +1,8 @@
 Stripe Service
 ===
 
-This service exposes a Java API based on the [rich API](https://stripe.com/docs/api/java#intro) provided by the [Stripe Payment Gateway](https://stripe.com)
-and offers an opinionated but limited functionality of using payment gateway.
+This service exposes a Java API based on the rich [API](https://stripe.com/docs/api/java#intro) provided by the [Stripe Payment Gateway](https://stripe.com)
+and offers opinionated but limited functionality for using Stripe's payment gateway.
 
 The `StripeService` can be used in your application by being added as a dependency your application's `pom.xml` :
 
@@ -18,12 +18,12 @@ Most [Common Use Cases](#Common-Use-Cases) are covered by this service.
 
 ### Basics
 
-- A Stripe `Customer` represents a user who's using the payment gateway to make a payment.
+- A Stripe `Customer` represents a user who is using the payment gateway to make a payment.
 - A `Payment Source` is applied to a `Customer`. A `Customer` can have several `Payment Sources` 
 but only one default at a time.
 _StripeService_ only supports a `Payment Source` of type `Credit Card` currently. A `Payment Source`
 is also called a `Token`.
-- Stripe provided client side Javascript (called `Elements`) can be used to enter
+- A Stripe-provided client-side Javascript (called `Elements`) can be used to enter
 credit card info in the browser or mobile device and submit the form info to your application. The payload that 
 is sent by submitting the form carries in it a `Token` that can be supplied to the appropriate API call.
 - A `Plan` should be created on the Stripe dashboard and there you could specify frequency, price, period.
