@@ -1,5 +1,0 @@
-logging:
-  config: classpath:log4j2.xml
-
-stripe:
-  apiKey: <place-your-api-key-here> # See https://dashboard.stripe.com/developers

@@ -1,45 +1,50 @@
 package com.technochord.stripe.service;
 
-import com.technochord.stripe.StripeException;
-import com.technochord.stripe.model.CustomerLite;
+import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.*;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.util.StringUtils;
+import com.technochord.stripe.StripeException;
+import com.technochord.stripe.model.CustomerLite;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.junit.Assert;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-@Log4j2
+@Slf4j
 public class StripeService {
 
-    public static String CUSTOMER_SOURCE = "source";
-    public static String CUSTOMER_DESCRIPTION = "description";
-    public static String CUSTOMER_COUPON = "coupon";
-    public static String CUSTOMER_EMAIL = "email";
-    public static String CUSTOMER_LIMIT = "limit";
-    public static String CUSTOMER_METADATA = "metadata";
-    public static String CUSTOMER_METADATA_CATEGORY = "category";
-    public static String CUSTOMER_STARTING_AFTER = "starting_after";
+    private static String CUSTOMER_SOURCE = "source";
+    private static String CUSTOMER_DESCRIPTION = "description";
+    private static String CUSTOMER_COUPON = "coupon";
+    private static String CUSTOMER_EMAIL = "email";
+    private static String CUSTOMER_LIMIT = "limit";
+    private static String CUSTOMER_METADATA = "metadata";
+    private static String CUSTOMER_METADATA_CATEGORY = "category";
+    private static String CUSTOMER_STARTING_AFTER = "starting_after";
 
-    public static String SUBSCRIPTION_CUSTOMER = "customer";
-    public static String SUBSCRIPTION_PLAN = "plan";
-    public static String SUBSCRIPTION_ITEMS = "items";
-    public static String SUBSCRIPTION_BILLING = "billing";
+    private static String SUBSCRIPTION_CUSTOMER = "customer";
+    private static String SUBSCRIPTION_PLAN = "plan";
+    private static String SUBSCRIPTION_ITEMS = "items";
+    private static String SUBSCRIPTION_BILLING = "billing";
 
-    public static String INVOICE_SUBSCRIPTION = "subscription";
-    public static String INVOICE_STARTING_AFTER = "starting_after";
-    public static String INVOICE_LIMIT = "limit";
+    private static String INVOICE_SUBSCRIPTION = "subscription";
+    private static String INVOICE_LIMIT = "limit";
 
-    public static String CARD_OBJECT = "object";
+    private static String CARD_OBJECT = "object";
 
-    public static String COUPON_STARTING_AFTER = "starting_after";
-    public static String COUPON_LIMIT = "limit";
+    private static String COUPON_STARTING_AFTER = "starting_after";
+    private static String COUPON_LIMIT = "limit";
+
+
+    public StripeService(String stripeApiKey) {
+        Assert.assertTrue("A Stripe API key must be supplied as a System property for the StripeService to be used! " +
+                "For example 'mvn clean test -Dgpg.skip=true -Dtest=StripeApplicationIntegrationTests -Dstripe.apiKey=<your-api-key-here>'. " +
+                "The key may be obtained from https://dashboard.stripe.com/developers", !StringUtils.isEmpty(stripeApiKey));
+        Stripe.apiKey = stripeApiKey;
+    }
 
     /**
      * Creation of a customer requires a unique email address and a description.
@@ -689,7 +694,7 @@ public class StripeService {
         }
         return charge;
     }
-
+    
     // ----- P R I V A T E --------
     private String createCustomer(Map<String, Object> customerParameters) {
         Customer retrievedCustomer = null;

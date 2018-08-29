@@ -1,32 +1,26 @@
 package com.technochord.stripe;
 
-import com.technochord.stripe.model.CustomerLite;
-import com.technochord.stripe.service.StripeService;
 import com.stripe.model.Charge;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.Invoice;
+import com.technochord.stripe.model.CustomerLite;
+import com.technochord.stripe.service.StripeService;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Ignore //Because needs stripe API key
 public class StripeApplicationIntegrationTests {
 
-	@Autowired
 	private StripeService stripeService;
+
+    private String apiKey = System.getProperty("stripe.apiKey");
 
 	@Before
 	public void setup() {
+	    stripeService = new StripeService(apiKey);
 		List<CustomerLite> customerList = stripeService.listAllCustomers();
 		for (CustomerLite c : customerList) {
 			//cancel all subscriptions

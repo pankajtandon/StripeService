@@ -157,15 +157,37 @@ The use cases that can currently be addressed are below. See [Tests](src/test/ja
     ```
 
      
-### To build and run tests
+### To use in your project
+
+In any class that belongs to your project:
 
 ```
-  mvn clean install -Dstripe.apiKey=<your-api-key-here> 
+  import com.technochord.stripe.service.StripeService;
+  ...
+
+  //Obtain an apiKey from https://dashboard.stripe.com/developers
+  StripeService stripeService = new StripeService(stripeApiKey);
+  ...
+
+  //Use stripeService methods
+  stripeService.createCustomer("anEmail@gmail.com", "A new Pilot Customer", "GENERAL");
+  ...
+
+```
+### To build
+
+```
+  mvn clean install
   
   # Skip gpg signing 
-  mvn clean install -Dstripe.apiKey=<your-api-key-here> -Dgpg.skip=true
+  mvn clean install -Dgpg.skip=true
   
 ```     
+
+### To run tests
+```
+  mvn clean test -Dgpg.skip=true -Dtest=StripeApplicationIntegrationTests -Dstripe.apiKey=<your-key-here>
+```
 
 ### Adding Project Lombok Agent
 This project uses Project Lombok to generate getters and setters etc. Compiling from the command line this shouldn't cause any problems, but in an IDE you need to add an agent to the JVM. Full instructions can be found in the Lombok website. The sign that you need to do this is a lot of compiler errors to do with missing methods and fields.
