@@ -10,7 +10,7 @@ The `StripeService` can be used in your application by being added as a dependen
     <dependency>
         <groupId>com.technochord.stripe</groupId>
         <artifactId>stripe-service</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.1</version>
     </dependency>
 ```
 

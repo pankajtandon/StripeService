@@ -7,13 +7,26 @@
 	<artifactId>stripe-service</artifactId>
 	<version>1.0.1</version>
 	<packaging>jar</packaging>
-
 	<name>stripe-service</name>
 	<description>
 		<![CDATA[
-           This service exposes a Java API (based on the rich Stripe API) provided by the Stripe Payment Gateway to support the most commonly used functionality.
+           This service exposes a Java API (based on the rich, Stripe API) provided by the Stripe Payment Gateway to support the most commonly used functionality.
         ]]>
 	</description>
+    <developers>
+        <developer>
+            <name>Pankaj Tandon</name>
+            <email>pankajtandon@gmail.com</email>
+            <organization>technochord</organization>
+            <organizationUrl>http://technochord.com</organizationUrl>
+        </developer>
+    </developers>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 	<url>https://github.com/pankajtandon/StripeService.git</url>
 	<scm>
 		<connection>
